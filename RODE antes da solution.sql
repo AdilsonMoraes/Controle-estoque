@@ -1,0 +1,65 @@
+
+-- ************ ANTES DE RODAR O SCRIPT, CRIAR A PASTA C:\CONTROLE_ESTOQUE ************ --
+USE MASTER ;  
+GO  
+
+IF EXISTS(select 1 from sys.databases  WHERE NAME LIKE '%CONTROLE_ESTOQUE%')
+BEGIN
+	DROP DATABASE CONTROLE_ESTOQUE;
+END
+
+GO
+
+CREATE DATABASE CONTROLE_ESTOQUE  
+ON   
+( NAME = CONTROLE_ESTOQUE_DAT,  
+    FILENAME = 'C:\CONTROLE_ESTOQUE\SALEDAT.MDF',  
+    SIZE = 10,  
+    MAXSIZE = 50,  
+    FILEGROWTH = 5 )  
+LOG ON  
+( NAME = CONTROLE_ESTOQUE_LOG,  
+    FILENAME = 'C:\CONTROLE_ESTOQUE\SALELOG.LDF',  
+    SIZE = 5MB,  
+    MAXSIZE = 25MB,  
+    FILEGROWTH = 5MB ) ;  
+GO 
+
+
+USE [CONTROLE_ESTOQUE]
+GO
+
+/****** OBJECT:  TABLE [DBO].[USUARIO]    SCRIPT DATE: 15/01/2018 16:55:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [DBO].[USUARIO](
+	[USRID] [INT] IDENTITY(1,1) NOT NULL,
+	[LOGIN] [VARCHAR](20) NULL,
+	[SENHA] [VARCHAR](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[USRID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+INSERT INTO [USUARIO]([LOGIN], [SENHA]) VALUES ('Teste', '123456');
+INSERT INTO [USUARIO]([LOGIN], [SENHA]) VALUES ('adilson', '111');
+GO
+
+PRINT 'VÁ NO MODEL SUARIO DO PROJETO E MUDE A STRING DE CONEXÃO COM OS DADOS'	
+PRINT ''
+PRINT ''
+PRINT ''
+PRINT '******** STRING DE CONEXÃO ********'
+DECLARE @ConnectionString varchar(1000);
+select @ConnectionString = 'conexao.ConnectionString = @"Data Source=' 
+select @ConnectionString = @ConnectionString +  @@SERVERNAME
+select @ConnectionString = @ConnectionString + ';Initial Catalog=CONTROLE_ESTOQUE;' 
+select @ConnectionString = @ConnectionString + 'User Id=sa;Password=moraes@123";'
+PRINT @ConnectionString
+
