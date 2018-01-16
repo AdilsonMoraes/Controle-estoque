@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace ControleEstoque.Web.Models
 
             using (var conexao = new SqlConnection())
             {
-                conexao.ConnectionString = conexao.ConnectionString = @"Data Source=BNU-0136\SQLEXPRESS;Initial Catalog=CONTROLE_ESTOQUE;User Id=sa;Password=moraes@123";
+                conexao.ConnectionString = conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {

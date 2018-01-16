@@ -9,22 +9,13 @@ namespace ControleEstoque.Web.Controllers
 {
     public class CadastroController : Controller
     {
-                // --------------------- Grupo de Produto --------------------- //   
-
-        // --- cria "dados" enquanto nao uso banco para isso
-        private static List<GrupoProdutoModel> _listaGrupoProduto = new List<GrupoProdutoModel>()
-        {
-            new GrupoProdutoModel() { Id=1, Nome="Livros", Ativo=true },
-            new GrupoProdutoModel() { Id=2, Nome="Mouses", Ativo=true },
-            new GrupoProdutoModel() { Id=3, Nome="Monitores", Ativo=false }
-        };
-
+        // --------------------- Grupo de Produto --------------------- //   
 
         // Abre a view com a lista acima, caso queira usar a lista.
         [Authorize]
         public ActionResult GrupoProduto()
         {
-            return View(_listaGrupoProduto);
+            return View(GrupoProdutoModel.RecuperarLista());
         }
 
         //Recupera o registro para confirmar ou excluir
@@ -32,7 +23,7 @@ namespace ControleEstoque.Web.Controllers
         [Authorize]
         public ActionResult RecuperarGrupoProduto(int id)
         {
-            return Json(_listaGrupoProduto.Find(x => x.Id == id));
+            return Json(GrupoProdutoModel.RecuperarPerloId(id));
         }
 
         //Passa o carro no registro
@@ -40,17 +31,7 @@ namespace ControleEstoque.Web.Controllers
         [Authorize]
         public ActionResult ExcluirGrupoProduto(int id)
         {
-            var ret = false;
-
-            var registroBD = _listaGrupoProduto.Find(x => x.Id == id);
-
-            if (registroBD != null)
-            {
-                _listaGrupoProduto.Remove(registroBD);
-                ret = true;
-            }
-
-            return Json(ret);
+             return Json(GrupoProdutoModel.ExcluirPeloId(id));
         }
 
         //Salva adicionando o item na lista
@@ -58,25 +39,43 @@ namespace ControleEstoque.Web.Controllers
         [Authorize]
         public ActionResult SalvarGrupoProduto(GrupoProdutoModel model)
         {
-            //Busca o Registro
-            var registroBD = _listaGrupoProduto.Find(x => x.Id == model.Id);
-
-            if (registroBD == null)
+            var resultado = "OK";
+            var mensagens = new List<string>();
+            var idSalvo = string.Empty;
+       
+            //Validação
+            if (!ModelState.IsValid)
             {
-                registroBD = model;
-                registroBD.Id = _listaGrupoProduto.Max(x => x.Id) + 1;
-                _listaGrupoProduto.Add(registroBD); 
+                resultado = "AVISO";
+                
+                //lista de mensagem
+                mensagens = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
             }
             else
             {
-                registroBD.Nome = model.Nome;
-                registroBD.Ativo = model.Ativo;
-            }
+                try
+                {
+                    //Busca o Registro
+                    var id = model.Salvar();
 
-            return Json(registroBD);
-     
+                    if (id > 0)
+                    {
+                        idSalvo = id.ToString();
+                    }
+                    else
+                    {
+                        resultado = "ERRO";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    resultado = "ERRO";
+                }
+            }
+            return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
         }
-                 // --------------------- Grupo de Produto --------------------- //   
+        // --------------------- Grupo de Produto --------------------- //   
 
         [Authorize]
         public ActionResult MarcaProduto()
