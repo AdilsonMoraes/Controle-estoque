@@ -36,3 +36,7 @@ textarea {
 .invisivel {
     display: none;
 }
+
+.cabecalho-pricipal {
+    border-bottom: 1px #dddddd solid;
+}

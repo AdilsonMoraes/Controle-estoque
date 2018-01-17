@@ -1,10 +1,11 @@
 ﻿@model ControleEstoque.Web.Models.LoginViewModel
 @{
     ViewBag.Title = "Login";
+    ViewBag.Cabecalho = "Entrar no Sistema";
 }
 <div class="container-login">
     <div class="row">
-        <h3 class="titulo">Entrar no Sistema</h3>
+        <h3 class="titulo">@ViewBag.Cabecalho</h3>
     </div>
     <div class="row">
         <section id="loginForm">
