@@ -3,44 +3,21 @@
     ViewBag.Title = "Cadastro de Grupo de Produtos";
 }
 
-@*****************  CSS *****************@
-<style>
-    #grid_cadastro > thead > tr th:nth-child(2) {
-        width: 110px;
-    }
-
-    #grid_cadastro > thead > tr th:nth-child(3) {
-        width: 200px;
-    }
-
-    #cadastro {
-        width: 70%;
-        margin: 0 auto;
-    }
-
-    #cadastro_conteudo {
-        margin-top: 20px;
-    }
-
-    #cabecalho_grid {
-        margin-bottom: 20px;
-    }
-</style>
-@*****************  CSS *****************@
-
-<div id="cadastro">
+<div id="cadastro" class="cadastro-principal">
+    
     <section id="cadastro_cabecalho" class="cabecalho-pricipal">
         <h1>@ViewBag.Title</h1>
     </section>
-    <section id="cadastro_conteudo">
-        <div id="cabecalho_grid" class="row">
+
+    <section id="cadastro_conteudo" class="cadastro-conteudo">
+        <div id="cabecalho_grid" class="row cabecalho_grid">
             <div class="col-md-12">
                 <a id="btn_incluir" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus"></i> Incluir</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table id="grid_cadastro" class="table table-bordered table-striped table-hover">
+                <table id="grid_cadastro" class="table table-bordered table-striped table-hover grid_cadastro-grupoprod grid_cadastro-grupoprod2">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -65,11 +42,11 @@
             </div>
         </div>
     </section>
+
 </div>
 
 @* Botao oculto para guardar o ID que vou trabalhar no CRUD *@
 @Html.Hidden("id_cadastro")
-
 
 <div id="modal_cadastro" class="form-horizontal invisivel" role="dialog">
     <div id="msg_mensagem_aviso" class="text-danger invisivel"></div>
