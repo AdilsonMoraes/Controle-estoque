@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace ControleEstoque.Web.Models
 {
@@ -59,7 +60,10 @@ namespace ControleEstoque.Web.Models
                 using (var comando = new SqlCommand())
                 {
                     comando.Connection = conexao;
-                    comando.CommandText = string.Format("select * from grupo_produto where (id = {0})", id);
+                    comando.CommandText = "select * from grupo_produto where (id = @id)";
+
+                    comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
                     var reader = comando.ExecuteReader();
 
                     if (reader.Read())
@@ -92,7 +96,10 @@ namespace ControleEstoque.Web.Models
                     using (var comando = new SqlCommand())
                     {
                         comando.Connection = conexao;
-                        comando.CommandText = string.Format("Delete from grupo_produto where (id = {0})", id);
+                        comando.CommandText = "Delete from grupo_produto where (id = @id)";
+
+                        comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
                         ret = (comando.ExecuteNonQuery() > 0); //ExecuteNonQuery quantidade de registro afetados pelo comando
                     }
                 }
@@ -116,18 +123,25 @@ namespace ControleEstoque.Web.Models
 
                     if (model == null) // se existir
                     {// INSERE
-                        comando.CommandText = string.Format("INSERT INTO grupo_produto (NOME, ATIVO) VALUES ('{0}', {1}); select convert(int, scope_identity());", this.Nome, this.Ativo ? 1 : 0);
+                        comando.CommandText = "INSERT INTO grupo_produto (NOME, ATIVO) VALUES (@nome, @ativo); select convert(int, scope_identity());";
+
+                        comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
+                        comando.Parameters.Add("@ativo", SqlDbType.VarChar).Value = (this.Ativo ? 1 : 0);
+
                         ret = (int)comando.ExecuteScalar(); //ExecuteScalar retorna um object, convertido para inteiro
                     }
                     else
                     {// ALTERA
-                        comando.CommandText = string.Format(
-                            "UPDATE grupo_produto SET NOME = '{1}', ATIVO = {2} WHERE Id = {0};", this.Id, this.Nome, this.Ativo ? 1 : 0);
+                        comando.CommandText = "UPDATE grupo_produto SET NOME = @nome, ATIVO = @ativo WHERE Id = @id;";
+
+                        comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
+                        comando.Parameters.Add("@ativo", SqlDbType.VarChar).Value = (this.Ativo ? 1 : 0);
+                        comando.Parameters.Add("@id", SqlDbType.Int).Value = this.Id;
+
                         if (comando.ExecuteNonQuery() > 0) //ExecuteNonQuery e retorna um inteiro, qtde de registros
                         {
                             ret = this.Id;   
                         }
-
                     }
                 }
             }

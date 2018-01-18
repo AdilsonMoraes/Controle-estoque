@@ -21,6 +21,7 @@ namespace ControleEstoque.Web.Controllers
         //Recupera o registro para confirmar ou excluir
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult RecuperarGrupoProduto(int id)
         {
             return Json(GrupoProdutoModel.RecuperarPerloId(id));
@@ -29,6 +30,7 @@ namespace ControleEstoque.Web.Controllers
         //Passa o carro no registro
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult ExcluirGrupoProduto(int id)
         {
              return Json(GrupoProdutoModel.ExcluirPeloId(id));
@@ -37,6 +39,7 @@ namespace ControleEstoque.Web.Controllers
         //Salva adicionando o item na lista
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult SalvarGrupoProduto(GrupoProdutoModel model)
         {
             var resultado = "OK";

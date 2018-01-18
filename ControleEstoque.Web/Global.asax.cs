@@ -17,5 +17,29 @@ namespace ControleEstoque.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        //Segurança da aplicação
+        void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+                      
+            if (ex is HttpRequestValidationException)//tratamento para JS na pagina por parte do usuario no textbox.
+            {
+                Response.Clear();
+                Response.StatusCode = 200;
+                Response.ContentType = "application/json";
+                //vai utilizar os campos que ja estao no form para preencher com a msgm.
+                Response.Write("{ \"Resultado\":\"AVISO\",\"Mensagens\":[\"Somente texto sem caracteres especiais pode ser enviado.\"],\"IdSalvo\":\"\"}");
+                Response.End();
+            }
+            else if (ex is HttpAntiForgeryException) //Valida token para saber se é a aplicação que esta inserindo o cara.
+            {
+                Response.Clear();
+                Response.StatusCode = 200;
+                Response.End();
+                // gravar LOG
+            }
+
+        }
     }
 }
