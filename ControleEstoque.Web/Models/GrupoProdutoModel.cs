@@ -22,6 +22,7 @@ namespace ControleEstoque.Web.Models
         public static List<GrupoProdutoModel> RecuperarLista()
         {
             var ret = new List<GrupoProdutoModel>();
+            bool atv = false;
 
             using (var conexao = new SqlConnection())
             {
@@ -35,12 +36,16 @@ namespace ControleEstoque.Web.Models
 
                     while (reader.Read())
                     {
+                        if((int)reader["Ativo"] == 1)
+                        {
+                            atv = true;
+                        }
+
                         ret.Add(new GrupoProdutoModel
                         {
                             Id = (int)reader["id"],
                             Nome = (string)reader["Nome"],
-                            Ativo = (bool)reader["Ativo"]
-
+                            Ativo = atv
                         });
                     }
                 }
@@ -140,7 +145,7 @@ namespace ControleEstoque.Web.Models
 
                         if (comando.ExecuteNonQuery() > 0) //ExecuteNonQuery e retorna um inteiro, qtde de registros
                         {
-                            ret = this.Id;   
+                            ret = this.Id;
                         }
                     }
                 }

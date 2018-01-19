@@ -214,3 +214,7 @@ C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\Cont
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\obj\Debug\ControleEstoque.Web.csproj.CoreCompileInputs.cache
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\obj\Debug\ControleEstoque.Web.dll
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\obj\Debug\ControleEstoque.Web.pdb
+C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\bin\EntityFramework.dll
+C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\bin\EntityFramework.SqlServer.dll
+C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\bin\EntityFramework.xml
+C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\ControleEstoque.Web\bin\EntityFramework.SqlServer.xml
