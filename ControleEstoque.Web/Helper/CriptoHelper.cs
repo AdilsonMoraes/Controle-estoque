@@ -9,6 +9,7 @@ namespace ControleEstoque.Web
 {
     public static class CriptoHelper
     {
+        #region Funcao de Criptografia MD5
         public static string HashMD5(string val)
         {
             var bytes = Encoding.ASCII.GetBytes(val);
@@ -23,5 +24,6 @@ namespace ControleEstoque.Web
 
             return ret;
         }
+        #endregion
     }
 }

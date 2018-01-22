@@ -66,18 +66,24 @@ namespace ControleEstoque.Web.Models
                 {
                     comando.Connection = conexao;
                     comando.CommandText = "select * from grupo_produto where (id = @id)";
-
                     comando.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
                     var reader = comando.ExecuteReader();
 
                     if (reader.Read())
                     {
+                        bool atv = false;
+
+                        if ((int)reader["Ativo"] == 1)
+                        {
+                            atv = true;
+                        }
+
                         ret = new GrupoProdutoModel
                         {
                             Id = (int)reader["id"],
                             Nome = (string)reader["Nome"],
-                            Ativo = (bool)reader["Ativo"]
+                            Ativo = atv
 
                         };
                     }

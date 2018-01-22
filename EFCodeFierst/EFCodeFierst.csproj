@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="SCRIPT SQL\Inserts.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +105,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801191916055_Initial.cs" />
-    <Compile Include="Migrations\201801191916055_Initial.Designer.cs">
-      <DependentUpon>201801191916055_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201801221833050_PrimeiroCommit.cs" />
+    <Compile Include="Migrations\201801221833050_PrimeiroCommit.Designer.cs">
+      <DependentUpon>201801221833050_PrimeiroCommit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801221835370_SegundoCommit.cs" />
+    <Compile Include="Migrations\201801221835370_SegundoCommit.Designer.cs">
+      <DependentUpon>201801221835370_SegundoCommit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Grupo_Produto.cs" />
@@ -128,8 +133,11 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801191916055_Initial.resx">
-      <DependentUpon>201801191916055_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801221833050_PrimeiroCommit.resx">
+      <DependentUpon>201801221833050_PrimeiroCommit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221835370_SegundoCommit.resx">
+      <DependentUpon>201801221835370_SegundoCommit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
