@@ -26,13 +26,13 @@ namespace ControleEstoque.Web.Models
                 using (var comando = new SqlCommand())
                 {
                     comando.Connection = conexao;
-                    comando.CommandText = string.Format("select * from versao");
+                    comando.CommandText = string.Format("select * from SobreInformacoes");
                     var reader = comando.ExecuteReader();
 
                     while (reader.Read())
                     {
                         var substring = (string)reader["BancoDados"];
-                        substring = substring.Substring(0, 46);
+                        substring = substring.Substring(0, 31);
 
                         ret.Add(new SobreModel
                         {

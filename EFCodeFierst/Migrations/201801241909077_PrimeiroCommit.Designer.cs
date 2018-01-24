@@ -7,13 +7,13 @@ namespace EFCodeFierst.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class PrimeiroEF : IMigrationMetadata
+    public sealed partial class PrimeiroCommit : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PrimeiroEF));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PrimeiroCommit));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801241654303_PrimeiroEF"; }
+            get { return "201801241909077_PrimeiroCommit"; }
         }
         
         string IMigrationMetadata.Source

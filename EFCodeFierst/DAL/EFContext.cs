@@ -17,7 +17,6 @@ namespace EFCodeFierst.DAL
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Grupo_Produto> Grupo_Produtos { get; set; }
-        public DbSet<Versao> Versao { get; set; }
-
+        public DbSet<SobreInformacoes> SobreInformacoes { get; set; }
     }
 }
