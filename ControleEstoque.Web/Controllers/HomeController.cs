@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControleEstoque.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,8 @@ namespace ControleEstoque.Web.Controllers
         [Authorize]
         public ActionResult Sobre()
         {
-            return View();
+            var lista = SobreModel.RecuperarVersao();
+            return View(lista);
         }
     }
 }

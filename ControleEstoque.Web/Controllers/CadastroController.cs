@@ -9,59 +9,79 @@ namespace ControleEstoque.Web.Controllers
 {
     public class CadastroController : Controller
     {
+        private const int _quantidadeMaxLinhaPorPagina = 5;
+
+        #region MarcaProduto
         [Authorize]
         public ActionResult MarcaProduto()
         {
             return View();
         }
+        #endregion
 
+        #region LocalProduto
         [Authorize]
         public ActionResult LocalProduto()
         {
             return View();
         }
+        #endregion
 
+        #region UnidadeMedida
         [Authorize]
         public ActionResult UnidadeMedida()
         {
             return View();
         }
+        #endregion
 
+        #region Produto
         [Authorize]
         public ActionResult Produto()
         {
             return View();
         }
+        #endregion
 
+        #region Pais
         [Authorize]
         public ActionResult Pais()
         {
             return View();
         }
+        #endregion
 
+        #region Estado
         [Authorize]
         public ActionResult Estado()
         {
             return View();
         }
+        #endregion
 
+        #region Cidade
         [Authorize]
         public ActionResult Cidade()
         {
             return View();
         }
+        #endregion
 
+        #region Fornecedor
         [Authorize]
         public ActionResult Fornecedor()
         {
             return View();
         }
+        #endregion
 
+        #region  PerfilUsuario
         [Authorize]
         public ActionResult PerfilUsuario()
         {
             return View();
         }
+        #endregion
 
         #region Grupos de produtos
 
@@ -69,14 +89,31 @@ namespace ControleEstoque.Web.Controllers
         [Authorize]
         public ActionResult GrupoProduto()
         {
-            return View(GrupoProdutoModel.RecuperarLista());
+            ViewBag.QuantidadeMaxLinhaPorPagina = _quantidadeMaxLinhaPorPagina;
+            ViewBag.PaginaAtual = 1;
+
+            var lista = GrupoProdutoModel.RecuperarLista(ViewBag.PaginaAtual, _quantidadeMaxLinhaPorPagina);
+
+            var difQuantPaginas = (lista.Count % ViewBag.QuantidadeMaxLinhaPorPagina) > 0 ? 1 : 0; //Se tiver resto joga 1
+            ViewBag.QuantPaginas = difQuantPaginas + (lista.Count/ ViewBag.QuantidadeMaxLinhaPorPagina); //Divide a qtde de registro somando o resto.
+
+            return View(lista);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public JsonResult GrupoProdutoPagina(int pagina)
+        {
+            var lista = GrupoProdutoModel.RecuperarLista(pagina, _quantidadeMaxLinhaPorPagina);
+            return Json(lista);
         }
 
         //Recupera o registro para confirmar ou excluir
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult RecuperarGrupoProduto(int id)
+        public JsonResult RecuperarGrupoProduto(int id)
         {
             return Json(GrupoProdutoModel.RecuperarPerloId(id));
         }
@@ -85,7 +122,7 @@ namespace ControleEstoque.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirGrupoProduto(int id)
+        public JsonResult ExcluirGrupoProduto(int id)
         {
             return Json(GrupoProdutoModel.ExcluirPeloId(id));
         }
@@ -94,7 +131,7 @@ namespace ControleEstoque.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult SalvarGrupoProduto(GrupoProdutoModel model)
+        public JsonResult SalvarGrupoProduto(GrupoProdutoModel model)
         {
             var resultado = "OK";
             var mensagens = new List<string>();
@@ -144,7 +181,12 @@ namespace ControleEstoque.Web.Controllers
         public ActionResult Usuario()
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
-            return View(UsuarioModel.RecuperarLista());
+            ViewBag.QuantidadeMaxLinhaPorPagina = 5;
+            var lista = UsuarioModel.RecuperarLista();
+            var difQuantPaginas = (lista.Count % ViewBag.QuantidadeMaxLinhaPorPagina) > 0 ? 1 : 0; //Se tiver resto joga 1
+            ViewBag.QuantPaginas = difQuantPaginas + (lista.Count/ ViewBag.QuantidadeMaxLinhaPorPagina); //Divide a qtde de registro somando o resto.
+
+            return View(lista);
         }
 
         //Recupera o registro para confirmar ou excluir
@@ -187,7 +229,7 @@ namespace ControleEstoque.Web.Controllers
             {
                 try
                 {
-                    if(model.Senha == _senhaPadrao)
+                    if (model.Senha == _senhaPadrao)
                     {
                         model.Senha = "";
                     }
@@ -213,7 +255,6 @@ namespace ControleEstoque.Web.Controllers
             return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
         }
         #endregion
-
 
     }
 }

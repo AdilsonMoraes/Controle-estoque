@@ -24,6 +24,6 @@ C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCo
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.csproj.CoreCompileInputs.cache
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.dll
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.pdb
-C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.Migrations.PrimeiroCommit.resources
+C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.Migrations.PrimeiroEF.resources
 C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.csproj.GenerateResource.Cache
-C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.Migrations.SegundoCommit.resources
+C:\Users\adilson.moreira\Documents\GitHub\controle-estoque\Controle-estoque\EFCodeFierst\obj\Debug\EFCodeFierst.Migrations.PrimeiroEF1.resources

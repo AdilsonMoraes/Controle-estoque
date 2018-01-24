@@ -10,11 +10,15 @@
     </section>
 
     <section id="cadastro_conteudo" class="cadastro-conteudo">
+
+        @*********************** Botao Incluir ************************@
         <div id="cabecalho_grid" class="row cabecalho_grid">
             <div class="col-md-12">
                 <a id="btn_incluir" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus"></i> Incluir</a>
             </div>
         </div>
+
+        @*********************** GRID ************************@
         <div class="row">
             <div class="col-md-12">
                 <table id="grid_cadastro" class="table table-bordered table-striped table-hover grid_cadastro-grupoprod grid_cadastro-grupoprod2">
@@ -26,21 +30,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr data-id="@item.Id">
-                                <td>@item.Nome</td>
-                                <td>@{var ativo = (item.Ativo ? "SIM" : "NÃO");}@ativo</td>
-                                <td>
-                                    <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
-                                    <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
-                                </td>
-                            </tr>
+                        @{
+                            var linha = 0;
+
+                            foreach (var item in Model)
+                            {
+                                linha++;
+                                if (linha <= ViewBag.QuantidadeMaxLinhaPorPagina)
+                                {
+                                    <tr data-id="@item.Id">
+                                        <td>@item.Nome</td>
+                                        <td>@{var ativo = (item.Ativo ? "SIM" : "NÃO");}@ativo</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                                            <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
                         }
                     </tbody>
                 </table>
             </div>
         </div>
+
+        @*********************** Paginação da grid ************************@
+        @if (ViewBag.QuantPaginas > 1)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            @for (int i = 2; i <= ViewBag.QuantPaginas; i++)
+                            {
+                                <li class="page-item"><a class="page-link" href="#">@i</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        }
     </section>
 
 </div>
@@ -76,6 +110,7 @@
                         <a id="btn_sair" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
                         <a id="btn_confirmar" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
                     </div>
+
                     @* Tratamento de erro *@
                     <div id="msg_aviso" class="alert alert-warning invisivel">Falta preencher os campos acima.</div>
                     <div id="msg_erro" class="alert alert-danger invisivel">Ops! Deu ruim.</div>
@@ -179,6 +214,7 @@
                 }
             });
         })
+
         .on('click', '#btn_confirmar', function () {
             var btn = $(this),
                 url = '@Url.Action("SalvarGrupoProduto", "Cadastro")',
@@ -218,16 +254,37 @@
                     $('#msg_erro').hide();
                 }
             });
-        });
+        })
+
+            //metodo
+        //quando for componente devemos usar # e quando for classe devemos usar o .
+            .on('click', '.page-item', function () {
+                var btn = $(this);
+                pagina = btn.text(),
+                    url =@Url.Action("GrupoProdutoPagina", "Cadastro")
+
+                $.post(url, add_anti_forgery_token({ pagina }), function (response)
+                {
+                    if (Response)
+                    {
+
+
+                    }
+
+                };
+
+            });
+
+
+
 
         function formatar_mensagem_aviso(mensagens) {
             var ret = '';
-
             for (var i = 0; i < mensagens.length; i++) {
                 ret += '<li>' + mensagens[i] + '</li>';
             }
-
             return '<ul>' + ret + '</ul>';
         }
+
     </script>
 }

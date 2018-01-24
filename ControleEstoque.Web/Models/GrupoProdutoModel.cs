@@ -19,19 +19,23 @@ namespace ControleEstoque.Web.Models
         public bool Ativo { get; set; }
 
 
-        public static List<GrupoProdutoModel> RecuperarLista()
+        public static List<GrupoProdutoModel> RecuperarLista(int pagina, int tampagina)
         {
             var ret = new List<GrupoProdutoModel>();
             bool atv = false;
 
             using (var conexao = new SqlConnection())
             {
+                var pos = (pagina - 1) * tampagina;
                 conexao.ConnectionString = conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from grupo_produto order by nome";
+                    comando.CommandText = string.Format(
+                        "select * from grupo_produto order by nome offset [0], fetch next {1} rows only", 
+                        pos>0 ? pos - 1 : 0, tampagina);
+
                     var reader = comando.ExecuteReader();
 
                     while (reader.Read())

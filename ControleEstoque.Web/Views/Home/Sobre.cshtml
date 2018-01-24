@@ -1,14 +1,40 @@
-﻿@{
+﻿@model List<ControleEstoque.Web.Models.SobreModel>
+@{
     ViewBag.Title = "Controle de Estoque";
 }
-
 <div id="sobre">
     <section id="sobre_cabecalho" class="cabecalho-pricipal">
-        <h1>>@ViewBag.Title</h1>
+        <div class="row">
+            <h1>@ViewBag.Title</h1>
+        </div>
     </section>
-
     <section id="sobre_conteudo">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="grid_cadastro" class="table table-bordered table-striped table-hover grid_cadastro-grupoprod grid_cadastro-grupoprod2">
+                        <thead>
+                            <tr>
+                                <th>Linguagem Desenvolvido</th>
+                                <th>Banco de Dados</th>
+                                <th>Versão Do Sistema</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
 
+                                <tr data-id="@item.Id">
+                                    <td>@item.LinguagemDev</td>
+                                    <td>@item.BancoDados</td>
+                                    <td>@item.Buildversao</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
-

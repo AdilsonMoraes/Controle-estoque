@@ -105,17 +105,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801221833050_PrimeiroCommit.cs" />
-    <Compile Include="Migrations\201801221833050_PrimeiroCommit.Designer.cs">
-      <DependentUpon>201801221833050_PrimeiroCommit.cs</DependentUpon>
+    <Compile Include="Migrations\201801241654303_PrimeiroEF.cs" />
+    <Compile Include="Migrations\201801241654303_PrimeiroEF.Designer.cs">
+      <DependentUpon>201801241654303_PrimeiroEF.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801221835370_SegundoCommit.cs" />
-    <Compile Include="Migrations\201801221835370_SegundoCommit.Designer.cs">
-      <DependentUpon>201801221835370_SegundoCommit.cs</DependentUpon>
+    <Compile Include="Migrations\201801241658548_PrimeiroEF1.cs" />
+    <Compile Include="Migrations\201801241658548_PrimeiroEF1.Designer.cs">
+      <DependentUpon>201801241658548_PrimeiroEF1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Grupo_Produto.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Versao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,11 +134,11 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801221833050_PrimeiroCommit.resx">
-      <DependentUpon>201801221833050_PrimeiroCommit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801241654303_PrimeiroEF.resx">
+      <DependentUpon>201801241654303_PrimeiroEF.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801221835370_SegundoCommit.resx">
-      <DependentUpon>201801221835370_SegundoCommit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801241658548_PrimeiroEF1.resx">
+      <DependentUpon>201801241658548_PrimeiroEF1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

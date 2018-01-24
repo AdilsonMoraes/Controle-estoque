@@ -9,7 +9,7 @@ namespace EFCodeFierst.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(EFCodeFierst.DAL.EFContext context)
