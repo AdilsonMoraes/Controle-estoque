@@ -9,16 +9,17 @@ using System.Data;
 
 namespace ControleEstoque.Web.Models
 {
-    public class GrupoProdutoModel
+    public class GrupoProdutoProp
     {
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Preencha o nome!")]
         public string Nome { get; set; }
         public bool Ativo { get; set; }
+    }
 
-
+    public class GrupoProdutoModel : GrupoProdutoProp
+    {
         public static List<GrupoProdutoModel> RecuperarLista(int pagina, int tampagina)
         {
             var ret = new List<GrupoProdutoModel>();

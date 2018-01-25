@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace ControleEstoque.Web.Models
 {
-    public class UsuarioModel
+    public class UsuaioProp
     {
         #region Propertys
 
@@ -20,7 +20,10 @@ namespace ControleEstoque.Web.Models
         public string Nome { get; set; }
 
         #endregion
+    }
 
+    public class UsuarioModel : UsuaioProp
+    {
         public static UsuarioModel ValidarUsuario(string login, string senha)
         {
             UsuarioModel ret = null;

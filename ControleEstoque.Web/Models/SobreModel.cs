@@ -8,13 +8,40 @@ using System.Web;
 
 namespace ControleEstoque.Web.Models
 {
-    public class SobreModel
+    public class SobreProp
     {
         public int Id { get; set; }
         public string LinguagemDev { get; set; }
         public string BancoDados { get; set; }
         public string Buildversao { get; set; }
 
+    }
+
+    public abstract class RecuperaSobre : SobreProp
+    {
+        public abstract void RecuperarSobreProp();
+
+        public static List<SobreProp> ListaInformacao()
+        {
+            var RecuperarSobreProp = new List<SobreProp>();
+            return RecuperarSobreProp;
+        }
+    }
+
+    public class ConsultarPessoa : RecuperaSobre
+    {
+        public override void RecuperarSobreProp()
+        {
+            Id = 0;
+            LinguagemDev = "";
+            BancoDados = "";
+            Buildversao = "";
+        }
+
+    }
+
+    public class SobreModel : ConsultarPessoa 
+    {
         public static List<SobreModel> RecuperarVersao()
         {
             var ret = new List<SobreModel>();
@@ -36,15 +63,11 @@ namespace ControleEstoque.Web.Models
 
                         ret.Add(new SobreModel
                         {
-
-
                             Id = (int)reader["id"],
                             LinguagemDev = (string)reader["LinguagemDev"],
                             BancoDados = substring,
                             Buildversao = (string)reader["Buildversao"]
-
                         });
-
                     }
                 }
             }
