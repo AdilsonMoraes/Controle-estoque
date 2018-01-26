@@ -123,7 +123,7 @@
 
 
 @section Scripts{
-    <script>
+<script>
         function add_anti_forgery_token(data) {
             data.__RequestVerificationToken = $('[name=__RequestVerificationToken]').val();
             return data;
@@ -258,25 +258,25 @@
 
             //metodo
         //quando for componente devemos usar # e quando for classe devemos usar o .
-            .on('click', '.page-item', function () {
-                var btn = $(this);
+        .on('click', '.page-item', function () {
+            var btn = $(this),
                 pagina = btn.text(),
-                    url =@Url.Action("GrupoProdutoPagina", "Cadastro")
+                url = '@Url.Action("GrupoProdutoPagina", "Cadastro")';
 
-                $.post(url, add_anti_forgery_token({ pagina }), function (response)
-                {
-                    if (Response)
-                    {
+            $.post(url, add_anti_forgery_token({ pagina }), function (response) {
+                if (response) {
+                    var table = $('#grid_cadastro').find('tbody');
 
-
+                    table.empty();
+                    for (var i = 0; i < response.length; i++) {
+                        table.append(criar_linha_grid(response[i]));
                     }
 
-                };
-
+                    btn.siblings().removeClass('active');
+                    btn.addClass('active');
+                }
             });
-
-
-
+        });
 
         function formatar_mensagem_aviso(mensagens) {
             var ret = '';
@@ -286,5 +286,5 @@
             return '<ul>' + ret + '</ul>';
         }
 
-    </script>
+</script>
 }

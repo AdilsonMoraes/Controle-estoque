@@ -20,28 +20,28 @@ namespace ControleEstoque.Web.Models
 
     public class GrupoProdutoModel : GrupoProdutoProp
     {
-        public static List<GrupoProdutoModel> RecuperarLista(int pagina, int tampagina)
+        public static List<GrupoProdutoModel> RecuperarLista(int pagina, int tamPagina)
         {
             var ret = new List<GrupoProdutoModel>();
-            bool atv = false;
 
             using (var conexao = new SqlConnection())
             {
-                var pos = (pagina - 1) * tampagina;
                 conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
+                    var pos = (pagina - 1) * tamPagina;
+
                     comando.Connection = conexao;
                     comando.CommandText = string.Format(
-                        "select * from grupo_produto order by nome offset {0} rows fetch next {1} rows only", 
-                        pos>0 ? pos - 1 : 0, tampagina);
-
+                        "select * from grupo_produto order by nome offset {0} rows fetch next {1} rows only",
+                        pos > 0 ? pos - 1 : 0, tamPagina);
                     var reader = comando.ExecuteReader();
-
                     while (reader.Read())
                     {
-                        if((int)reader["Ativo"] == 1)
+                        bool atv = false;
+
+                        if ((int)reader["Ativo"] == 1)
                         {
                             atv = true;
                         }
@@ -49,11 +49,32 @@ namespace ControleEstoque.Web.Models
                         ret.Add(new GrupoProdutoModel
                         {
                             Id = (int)reader["id"],
-                            Nome = (string)reader["Nome"],
+                            Nome = (string)reader["nome"],
                             Ativo = atv
                         });
                     }
                 }
+            }
+
+            return ret;
+        }
+
+        public static int RecuperarQuantidade()
+        {
+            var ret = 0;
+
+
+            using (var conexao = new SqlConnection())
+            {
+                conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
+                conexao.Open();
+                using (var comando = new SqlCommand())
+                {
+                    comando.Connection = conexao;
+                    comando.CommandText = string.Format("select count(*) from grupo_produto");
+                    ret = (int)comando.ExecuteScalar();
+                }
+
             }
 
             return ret;
@@ -65,7 +86,7 @@ namespace ControleEstoque.Web.Models
 
             using (var conexao = new SqlConnection())
             {
-                conexao.ConnectionString =  ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
+                conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
@@ -131,7 +152,7 @@ namespace ControleEstoque.Web.Models
 
             using (var conexao = new SqlConnection())
             {
-                conexao.ConnectionString =  ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
+                conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {

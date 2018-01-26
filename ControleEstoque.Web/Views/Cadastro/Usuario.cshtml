@@ -60,31 +60,21 @@
         </div>
 
         @*********************** Paginação da grid ************************@
-        @{
-            if (ViewBag.QuantPaginas > 1)
-            {
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                @{
-                                    for (int i = 1; i <= ViewBag.QuantPaginas; i++)
-                                    {
-                                        if (i == 1)
-                                        {
-                                            <li class="page-link active"><a class="page-link" href="#">@i</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="page-link"><a class="page-link" href="#">@i</a></li>
-                                        }
-                                    }
-                                }
-                            </ul>
-                        </nav>
-                    </div>
+        @if (ViewBag.QuantPaginas > 1)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            @for (int i = 2; i <= ViewBag.QuantPaginas; i++)
+                            {
+                                <li class="page-item"><a class="page-link" href="#">@i</a></li>
+                            }
+                        </ul>
+                    </nav>
                 </div>
-            }
+            </div>
         }
     </section>
 
@@ -296,7 +286,27 @@
         }
 
         //Paginação da grid
+            //metodo
+        //quando for componente devemos usar # e quando for classe devemos usar o .
+        .on('click', '.page-item', function () {
+            var btn = $(this),
+                pagina = btn.text(),
+                url = '@Url.Action("UsuarioPagina", "Cadastro")';
 
+            $.post(url, add_anti_forgery_token({ pagina }), function (response) {
+                if (response) {
+                    var table = $('#grid_cadastro').find('tbody');
+
+                    table.empty();
+                    for (var i = 0; i < response.length; i++) {
+                        table.append(criar_linha_grid(response[i]));
+                    }
+
+                    btn.siblings().removeClass('active');
+                    btn.addClass('active');
+                }
+            });
+    });
 
     </script>
 }

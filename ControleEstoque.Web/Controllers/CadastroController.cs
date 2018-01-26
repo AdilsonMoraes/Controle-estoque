@@ -9,6 +9,8 @@ namespace ControleEstoque.Web.Controllers
 {
     public class CadastroController : Controller
     {
+
+        private const string _senhaPadrao = "{$127;$188}";
         private const int _quantidadeMaxLinhaPorPagina = 5;
 
         #region MarcaProduto
@@ -93,9 +95,9 @@ namespace ControleEstoque.Web.Controllers
             ViewBag.PaginaAtual = 1;
 
             var lista = GrupoProdutoModel.RecuperarLista(ViewBag.PaginaAtual, _quantidadeMaxLinhaPorPagina);
-
-            var difQuantPaginas = (lista.Count % ViewBag.QuantidadeMaxLinhaPorPagina) > 0 ? 1 : 0; //Se tiver resto joga 1
-            ViewBag.QuantPaginas = difQuantPaginas + (lista.Count/ ViewBag.QuantidadeMaxLinhaPorPagina); //Divide a qtde de registro somando o resto.
+            var Quant = GrupoProdutoModel.RecuperarQuantidade();
+            var difQuantPaginas = (Quant % ViewBag.QuantidadeMaxLinhaPorPagina) > 0 ? 1 : 0; //Se tiver resto joga 1
+            ViewBag.QuantPaginas = difQuantPaginas + (lista.Count / ViewBag.QuantidadeMaxLinhaPorPagina); //Divide a qtde de registro somando o resto.
 
             return View(lista);
         }
@@ -174,19 +176,30 @@ namespace ControleEstoque.Web.Controllers
 
         #region Usuarios
 
-        private const string _senhaPadrao = "{$127;$188}";
 
         // Abre a view com a lista acima, caso queira usar a lista.
         [Authorize]
         public ActionResult Usuario()
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
-            ViewBag.QuantidadeMaxLinhaPorPagina = 5;
-            var lista = UsuarioModel.RecuperarLista();
-            var difQuantPaginas = (lista.Count % ViewBag.QuantidadeMaxLinhaPorPagina) > 0 ? 1 : 0; //Se tiver resto joga 1
-            ViewBag.QuantPaginas = difQuantPaginas + (lista.Count/ ViewBag.QuantidadeMaxLinhaPorPagina); //Divide a qtde de registro somando o resto.
+            ViewBag.QuantidadeMaxLinhaPorPagina = _quantidadeMaxLinhaPorPagina;
+            ViewBag.PaginaAtual = 1;
+            var lista = UsuarioModel.RecuperarLista(ViewBag.PaginaAtual, _quantidadeMaxLinhaPorPagina);
+            var Quant = UsuarioModel.RecuperarQuantidade();
+
+            var difQuantPaginas = (Quant % ViewBag.QuantidadeMaxLinhaPorPagina) > 0 ? 1 : 0; //Se tiver resto joga 1
+            ViewBag.QuantPaginas = difQuantPaginas + (lista.Count / ViewBag.QuantidadeMaxLinhaPorPagina); //Divide a qtde de registro somando o resto.
 
             return View(lista);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public JsonResult UsuarioPagina(int pagina)
+        {
+            var lista = UsuarioModel.RecuperarLista(pagina, _quantidadeMaxLinhaPorPagina);
+            return Json(lista);
         }
 
         //Recupera o registro para confirmar ou excluir
