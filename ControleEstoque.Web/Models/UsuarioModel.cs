@@ -12,10 +12,14 @@ namespace ControleEstoque.Web.Models
         #region Propertys
 
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Informe o login")]
         public string Login { get; set; }
+
         [Required(ErrorMessage = "Informe o senha")]
+        //[StringLength(10, MinimumLength = 4)]
         public string Senha { get; set; }
+
         [Required(ErrorMessage = "Informe o nome")]
         public string Nome { get; set; }
 
