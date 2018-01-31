@@ -6,16 +6,10 @@ using System.Web.Mvc;
 
 namespace ControleEstoque.Web.Controllers
 {
-    public class RelatorioController : Controller
+    public class GrafEntradaSaidaMesaController : Controller
     {
         [Authorize]
-        public ActionResult PosicaoEstoque()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult Ressuprimento()
+        public ActionResult Index()
         {
             return View();
         }

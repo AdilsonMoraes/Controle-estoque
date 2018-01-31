@@ -6,18 +6,15 @@ using System.Web.Mvc;
 
 namespace ControleEstoque.Web.Controllers
 {
-    public class GraficoController : Controller
+    public class OpLancPerdaProdutoController : Controller
     {
+     
         [Authorize]
-        public ActionResult PerdaMes()
+        public ActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
-        public ActionResult EntradaSaidaMesa()
-        {
-            return View();
-        }
+
     }
 }

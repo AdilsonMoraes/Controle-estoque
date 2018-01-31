@@ -52,10 +52,10 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Entrada de produtos", "EntradaEstoque", "Operacao")</li>
-                                <li>@Html.ActionLink("Saída de produtos", "SaidaEstoque", "Operacao")</li>
-                                <li>@Html.ActionLink("Lançamento de perdas de produtos", "LancPerdaProduto", "Operacao")</li>
-                                <li>@Html.ActionLink("Inventário de estoque", "Inventario", "Operacao")</li>
+                                <li>@Html.ActionLink("Entrada de produtos", "Index", "OpEntradaEstoque")</li>
+                                <li>@Html.ActionLink("Saída de produtos", "Index", "OpSaidaEstoque")</li>
+                                <li>@Html.ActionLink("Lançamento de perdas de produtos", "Index", "OpLancPerdaProduto")</li>
+                                <li>@Html.ActionLink("Inventário de estoque", "Index", "OpInventario")</li>
                             </ul>
                         </li>
                         <li>
@@ -64,8 +64,8 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Posição do Estoque", "PosicaoEstoque", "Relatorio")</li>
-                                <li>@Html.ActionLink("Ressuprimento", "Ressuprimento", "Relatorio")</li>
+                                <li>@Html.ActionLink("Posição do Estoque", "Index", "RelPosicaoEstoque")</li>
+                                <li>@Html.ActionLink("Ressuprimento", "Index", "RelRessuprimento")</li>
                             </ul>
                         </li>
                         <li>
@@ -74,8 +74,8 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Perdas por mês", "PerdaMes", "Grafico")</li>
-                                <li>@Html.ActionLink("Entradas vs saídas por mês", "EntradaSaidaMesa", "Grafico")</li>
+                                <li>@Html.ActionLink("Perdas por mês", "Index", "GrafPerdaMes")</li>
+                                <li>@Html.ActionLink("Entradas vs saídas por mês", "Index", "GrafEntradaSaidaMesa")</li>
                             </ul>
                         </li>
                     </ul>
@@ -97,13 +97,14 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content body-imgfundo">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Controle de Estoque</p>
         </footer>
     </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

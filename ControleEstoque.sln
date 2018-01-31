@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleEstoque.Web", "ControleEstoque.Web\ControleEstoque.Web.csproj", "{09B95227-5341-47B8-A2CF-473DCFC21E73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCodeFierst", "EFCodeFierst\EFCodeFierst.csproj", "{37A8FBA2-8221-475B-9F8E-A2E1112506D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCodeFirst", "EFCodeFierst\EFCodeFirst.csproj", "{37A8FBA2-8221-475B-9F8E-A2E1112506D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
