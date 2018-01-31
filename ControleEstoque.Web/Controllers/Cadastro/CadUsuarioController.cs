@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ControleEstoque.Web.Controllers;
 
 namespace ControleEstoque.Web.Controllers
 {
     public class CadUsuarioController : Controller
     {
-
         private const string _senhaPadrao = "{$127;$188}";
 
         // Abre a view com a lista acima, caso queira usar a lista.
