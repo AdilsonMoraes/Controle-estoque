@@ -2,22 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ControleEstoque.Web.Controllers;
 
 namespace ControleEstoque.Web.Controllers
 {
     public class CadUsuarioController : Controller
-    {
-        private const string _senhaPadrao = "{$127;$188}";
-
+    {       
         // Abre a view com a lista acima, caso queira usar a lista.
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.SenhaPadrao = _senhaPadrao;
-            ViewBag.PaginaAtual = 1;
+            ViewBag.SenhaPadrao = VarGlobal.SenhaPadrao;
+            ViewBag.PaginaAtual = VarGlobal.PaginaAtual;
             var lista = UsuarioModel.RecuperarLista(ViewBag.PaginaAtual);
             var Quant = UsuarioModel.RecuperarQuantidade();
 
@@ -60,14 +56,16 @@ namespace ControleEstoque.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SalvarUsuario(UsuarioModel model)
         {
-            var resultado = "OK";
+            string msg = GlobalMsg.RetornaMsg((int)GlobalMsg.OptionErro.OK);
+            var resultado = msg;
             var mensagens = new List<string>();
             var idSalvo = string.Empty;
 
             //Validação
             if (!ModelState.IsValid)
             {
-                resultado = "AVISO";
+                msg = GlobalMsg.RetornaMsg((int)GlobalMsg.OptionErro.AVISO);
+                resultado = msg;
 
                 //lista de mensagem
                 mensagens = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
@@ -76,7 +74,7 @@ namespace ControleEstoque.Web.Controllers
             {
                 try
                 {
-                    if (model.Senha == _senhaPadrao)
+                    if (model.Senha == VarGlobal.SenhaPadrao)
                     {
                         model.Senha = "";
                     }
@@ -90,13 +88,15 @@ namespace ControleEstoque.Web.Controllers
                     }
                     else
                     {
-                        resultado = "ERRO";
+                        msg = GlobalMsg.RetornaMsg((int)GlobalMsg.OptionErro.ERRO);
+                        resultado = msg;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    resultado = "ERRO";
+                    msg = GlobalMsg.RetornaMsg((int)GlobalMsg.OptionErro.ERRO);
+                    resultado = msg;
                 }
             }
             return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
