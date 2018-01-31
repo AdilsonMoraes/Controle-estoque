@@ -10,6 +10,5 @@ namespace ControleEstoque.Web.Controllers
         public const string SenhaPadrao = "{$127;$188}";
         public const int QuantidadeMaxLinhaPorPagina = 5;
         public const int PaginaAtual = 1;
-
     }
 }

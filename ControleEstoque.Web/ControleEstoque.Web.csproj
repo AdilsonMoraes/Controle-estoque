@@ -169,7 +169,7 @@
     <Compile Include="Controllers\Cadastro\CadUsuarioController.cs" />
     <Compile Include="Controllers\Cadastro\CadGrupoProdutoController.cs" />
     <Compile Include="Controllers\Conta\ContaController.cs" />
-    <Compile Include="Controllers\GlobalMsg.cs" />
+    <Compile Include="Global\GlobalMsg.cs" />
     <Compile Include="Controllers\Grafico\GrafEntradaSaidaMesaController.cs" />
     <Compile Include="Controllers\Grafico\GrafPerdaMesController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
@@ -179,7 +179,7 @@
     <Compile Include="Controllers\Operacao\OpSaidaEstoqueController.cs" />
     <Compile Include="Controllers\Relatorio\RelPosicaoEstoqueController.cs" />
     <Compile Include="Controllers\Relatorio\RelRessuprimentoController.cs" />
-    <Compile Include="Controllers\VarGlobal.cs" />
+    <Compile Include="Global\VarGlobal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
