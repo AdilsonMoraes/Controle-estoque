@@ -163,7 +163,7 @@
         .on('click', '.btn-alterar', function () {
             var btn = $(this),
                 id = btn.closest('tr').attr('data-id'),
-                url = '@Url.Action("RecuperarUsuario", "Cadastro")',
+                url = '@Url.Action("RecuperarUsuario", "CadUsuario")',
                 param = { 'id': id };
 
             $.post(url, add_anti_forgery_token(param), function (response) {
@@ -179,7 +179,7 @@
             var btn = $(this),
                 tr = btn.closest('tr'),
                 id = tr.attr('data-id'),
-                url = '@Url.Action("ExcluirUsuario", "Cadastro")',
+                url = '@Url.Action("ExcluirUsuario", "CadUsuario")',
                 param = { 'id': id };
 
             bootbox.confirm({
@@ -209,7 +209,7 @@
         //Confirmação do popup
         .on('click', '#btn_confirmar', function () {
             var btn = $(this),
-                url = '@Url.Action("SalvarUsuario", "Cadastro")',
+                url = '@Url.Action("SalvarUsuario", "CadUsuario")',
                 param = {
                     Id: $('#id_cadastro').val(),
                     Nome: $('#txt_nome').val(),

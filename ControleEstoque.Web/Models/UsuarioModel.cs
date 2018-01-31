@@ -17,7 +17,6 @@ namespace ControleEstoque.Web.Models
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Informe o senha")]
-        //[StringLength(10, MinimumLength = 4)]
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "Informe o nome")]
@@ -62,7 +61,7 @@ namespace ControleEstoque.Web.Models
             return ret;
         }
 
-        public static List<UsuarioModel> RecuperarLista(int pagina, int tamPagina)
+        public static List<UsuarioModel> RecuperarLista(int pagina)
         {
             var ret = new List<UsuarioModel>();
 
@@ -72,8 +71,6 @@ namespace ControleEstoque.Web.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
-                    var pos = (pagina - 1) * tamPagina;
-
                     comando.Connection = conexao;
                     comando.CommandText = "select Usuarioid, login, nome,senha from Usuario order by nome";
                     var reader = comando.ExecuteReader();
