@@ -1,2 +1,28 @@
-﻿body {
+﻿.invisivel {
+    display: none;
+}
+
+.cabecalho-pricipal {
+    border-bottom: 1px #dddddd solid;
+}
+
+.cabecalho_grid {
+    margin-bottom: 20px;
+}
+
+.cadastro-principal {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.cadastro-conteudo {
+    margin-top: 20px;
+}
+
+.grid_cadastro-grupoprod > thead > tr th:nth-child(3) {
+    width: 200px;
+}
+
+.grid_cadastro-grupoprod2 > thead > tr th:nth-child(2) {
+    width: 110px;
 }
